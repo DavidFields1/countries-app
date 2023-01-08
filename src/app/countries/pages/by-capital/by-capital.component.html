@@ -1,0 +1,22 @@
+<h2>By Capital</h2>
+<hr>
+ 
+<div class="row">
+    <div class="col">
+        <app-countries-input
+            (onEnter)="search($event)"
+            (onDebounce)="suggestions($event)"
+            placeholder="Search for Capital City" 
+        ></app-countries-input>
+    </div>
+</div> 
+
+<hr>
+
+<app-alert *ngIf="anyError"></app-alert>
+
+<div class="row" *ngIf="countries.length > 0">
+    <div class="col">
+        <app-countries-table [countries]="countries"></app-countries-table>
+    </div>
+</div>
