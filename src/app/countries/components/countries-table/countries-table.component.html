@@ -1,5 +1,5 @@
 <table class="table table-hover">
-    <thead>
+    <thead class="animate__animated animate__fadeIn">
         <tr>
             <th>#</th>
             <th>Flag</th>
@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let country of countries">
+        <tr *ngFor="let country of countries" class="animate__animated animate__fadeIn">
             <td>{{ country.ccn3 }}</td>
             <td> <img [src]='country.flags.png' [alt]="country.name.common" class="small-flag"/> </td>
             <td>{{ country.name.common }}</td>

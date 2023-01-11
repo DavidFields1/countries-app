@@ -5,11 +5,28 @@ import { Country } from '../../interfaces/countries.interface';
 @Component({
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
-  styles: [],
+  styles: [
+    `
+      ul {
+        position: absolute;
+        width: 20rem;
+        z-index: 999;
+      }
+      li {
+        cursor: pointer;
+      }
+      .suggestions-flag {
+        width: 30px;
+        display: inline-block;
+        margin-right: 20px;
+      }
+    `,
+  ],
 })
 export class ByCountryComponent {
   anyError: boolean = false;
   countries: Country[] = [];
+  suggestedCountries: Country[] = [];
 
   constructor(private countriesService: CountriesService) {}
 
@@ -26,8 +43,17 @@ export class ByCountryComponent {
     );
   }
 
-  suggestions(query: string) {
+  getSuggestions(query: string) {
     this.anyError = false;
-    // TODO: implement suggestions
+    if (!query) {
+      this.suggestedCountries = [];
+      return;
+    }
+
+    this.countriesService
+      .searchCountry(query)
+      .subscribe(
+        (countries) => (this.suggestedCountries = countries.splice(0, 4))
+      );
   }
 }

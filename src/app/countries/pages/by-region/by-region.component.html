@@ -1,1 +1,28 @@
-<p>by-region works!</p>
+<h3>By Region</h3>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <!-- [ngClass]="{
+            'btn-primary': selectedRegion == region,
+            'btn-outline-primary': selectedRegion != region
+        }" -->
+        <!-- [class.btn-primary]="region == selectedRegion" -->
+        <button 
+            *ngFor="let region of regions"
+            [class]="getStyles(region)"
+            (click)="selectRegion(region)"
+        >
+            {{ region }}
+        </button>
+
+        <app-alert *ngIf="anyError"></app-alert>
+
+        <div class="row" *ngIf="countries.length > 0">
+            <div class="col">
+                <app-countries-table [countries]="countries"></app-countries-table>
+            </div>
+        </div>
+
+    </div>
+</div>
